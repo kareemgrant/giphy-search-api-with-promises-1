@@ -33,21 +33,36 @@ $(function () {
 
   function search (searchTerm) {
     const url = 'https://api.giphy.com/v1/gifs/search'
-    const apiKey = '[ADD YOUR GIPHY API KEY HERE]'
+    const apiKey = 'sgd4T00kBYvHLE88w8XYtedOwFukyfnt'
 
-    $.ajax({
-      url: url,
-      type: 'GET',
-      data: { q: searchTerm, limit: 50, api_key: apiKey }
+    axios.get(url, {
+      params: {
+        api_key: apiKey,
+        q: searchTerm,
+        limit: 50
+      }
     })
-    .done((response) => {
-      // execute this function if request is successful
-      console.log(response)
-      displayResults(response.data)
+    .then((response) => {
+      console.log(response.data.data)
+      displayResults(response.data.data)
     })
-    .fail(() => {
-      // execute this function if request fails
-      alert('error occurred')
+    .catch((error) => {
+      console.log(error)
     })
+
+    // $.ajax({
+    //   url: url,
+    //   type: 'GET',
+    //   data: { q: searchTerm, limit: 50, api_key: apiKey }
+    // })
+    // .done((response) => {
+    //   // execute this function if request is successful
+    //   console.log(response)
+    //   displayResults(response.data)
+    // })
+    // .fail(() => {
+    //   // execute this function if request fails
+    //   alert('error occurred')
+    // })
   }
 })
